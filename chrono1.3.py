@@ -106,15 +106,6 @@ if year:
                 else:
                     col2.markdown(f"**{i+1}.** {event} {tag_str}")
 
-            # ---- Word Cloud ----
-            st.markdown("---")
-            st.subheader("☁️ Word Cloud of Events")
-            text_blob = " ".join([e for e, _ in filtered_events])
-            wc = WordCloud(width=800, height=300, background_color="white").generate(text_blob)
-            fig, ax = plt.subplots()
-            ax.imshow(wc, interpolation="bilinear")
-            ax.axis("off")
-            st.pyplot(fig)
 
             # ---- Download Buttons ----
             df = pd.DataFrame(filtered_events, columns=["Event", "Tags"])
@@ -130,15 +121,4 @@ if year:
         wiki_url = f"https://{language}.wikipedia.org/wiki/{year}"
         st.markdown(f"🔗 [More on Wikipedia →]({wiki_url})")
 
-        # ---- Feedback Form ----
-        st.markdown("---")
-        st.subheader("💬 Share Feedback")
-        with st.form("feedback_form"):
-            name = st.text_input("Your Name")
-            rating = st.slider("Rate ChronoLense", 1, 5, 3)
-            comments = st.text_area("Comments or Suggestions")
-            submitted = st.form_submit_button("Submit")
-            if submitted:
-                st.success("Thanks for your feedback!")
-    else:
-        st.warning("No events found or Wikipedia format may have changed.")
+    
